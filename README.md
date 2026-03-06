@@ -36,11 +36,16 @@
 <br />
 
 <div align="center">
-  <img src="assets/screenshots/hero.png" width="19%" />
-  <img src="assets/screenshots/app-preview.png" width="19%" />
-  <img src="assets/screenshots/chat-interface.png" width="19%" />
-  <img src="assets/screenshots/publish.png" width="19%" />
-  <img src="assets/screenshots/showcase.png" width="19%" />
+  <img src="assets/screenshots/hero-banner.png" alt="Build Things You Imagine" width="100%" />
+</div>
+
+<br />
+
+<div align="center">
+  <img src="assets/screenshots/app-preview.png" width="24%" />
+  <img src="assets/screenshots/chat-interface.png" width="24%" />
+  <img src="assets/screenshots/publish.png" width="24%" />
+  <img src="assets/screenshots/showcase.png" width="24%" />
 </div>
 
 <br />
