@@ -67,7 +67,7 @@ https://github.com/user-attachments/assets/0d5a79ef-f69a-452b-a25a-9e149de6e05a
 
 ## What is Vibra Code?
 
-Vibra Code is an **open-source AI app builder** that lets you create mobile apps by describing them in plain English. An AI agent writes the code in a cloud sandbox while you watch in real time. Then you see a live preview — right on your phone.
+Vibra Code is an **open-source AI app builder** that lets you create mobile apps by describing them in plain English. The backend runs [Claude Code](https://claude.ai/code) (Anthropic's AI coding CLI) inside an [E2B](https://e2b.dev) cloud sandbox to generate complete apps while you watch in real time. Then you see a live preview — right on your phone.
 
 Think of it as an **open-source alternative to [Vibe Code App](https://www.vibecodeapp.com/), [Rork](https://rork.com/), [Lovable](https://lovable.dev/), and [Bolt.new](https://bolt.new/)** — but you can self-host it, customize the AI prompts, swap AI providers, and fork it to make it your own.
 
@@ -245,7 +245,7 @@ vibra-code/
 | **Database** | Convex (real-time) |
 | **Jobs** | Inngest |
 | **Sandboxes** | E2B |
-| **AI** | Claude Agent SDK / Cursor / Gemini |
+| **AI** | Claude Code CLI / Cursor / Gemini |
 | **Auth** | Clerk |
 | **Payments** | Stripe + RevenueCat (optional) |
 | **Mobile** | React Native / Expo SDK 54 |
