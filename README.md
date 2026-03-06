@@ -48,9 +48,14 @@
 
 ## Demos
 
-> **Watch the demos on X:** &nbsp; [Mobile App](https://x.com/SehindHemzani/status/2006879820794499377) &nbsp;|&nbsp; [Website](https://x.com/SehindHemzani/status/2007196039581716917) &nbsp;|&nbsp; [Game built with Vibra Code](https://x.com/SehindHemzani/status/2007187786487787985)
+### Mobile App
+https://github.com/user-attachments/assets/f72fcbf0-091a-4cc1-a453-fed062f52bdf
 
-<!-- To embed videos: edit this README on GitHub.com, drag-drop your .mp4 files into the editor, and GitHub will generate embeddable URLs -->
+### Website
+https://github.com/user-attachments/assets/5610f5e1-d146-4634-b616-301560e230f0
+
+### Game Built with Vibra Code
+https://github.com/user-attachments/assets/0d5a79ef-f69a-452b-a25a-9e149de6e05a
 
 ---
 
