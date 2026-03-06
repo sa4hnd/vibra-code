@@ -1,0 +1,142 @@
+import {
+  ConfigPlugin,
+  IOSConfig,
+  WarningAggregator,
+  XcodeProject,
+  withInfoPlist,
+  withXcodeProject,
+} from 'expo/config-plugins';
+
+import type { PluginConfigType } from './pluginConfig';
+
+const { createBuildPodfilePropsConfigPlugin } = IOSConfig.BuildProperties;
+
+export const withIosBuildProperties = createBuildPodfilePropsConfigPlugin<PluginConfigType>(
+  [
+    {
+      propName: 'newArchEnabled',
+      propValueGetter: (config) => {
+        if (config.ios?.newArchEnabled !== undefined) {
+          WarningAggregator.addWarningIOS(
+            'withIosBuildProperties',
+            'ios.newArchEnabled is deprecated, use app config `newArchEnabled` instead.\n' +
+              'https://docs.expo.dev/versions/latest/config/app/#newarchenabled'
+          );
+        }
+        return config.ios?.newArchEnabled?.toString();
+      },
+    },
+    {
+      propName: 'ios.useFrameworks',
+      propValueGetter: (config) => config.ios?.useFrameworks,
+    },
+    {
+      propName: 'ios.forceStaticLinking',
+      propValueGetter: (config) => JSON.stringify(config.ios?.forceStaticLinking ?? []),
+    },
+    {
+      propName: 'EX_DEV_CLIENT_NETWORK_INSPECTOR',
+      propValueGetter: (config) => (config.ios?.networkInspector ?? true).toString(),
+    },
+    {
+      propName: 'apple.extraPods',
+      propValueGetter: (config) => {
+        const extraPods = config.ios?.extraPods ?? [];
+        return extraPods.length > 0 ? JSON.stringify(extraPods) : undefined;
+      },
+    },
+    {
+      propName: 'apple.ccacheEnabled',
+      propValueGetter: (config) => config.ios?.ccacheEnabled?.toString(),
+    },
+    {
+      propName: 'apple.privacyManifestAggregationEnabled',
+      propValueGetter: (config) =>
+        (config.ios?.privacyManifestAggregationEnabled ?? true).toString(),
+    },
+    {
+      propName: 'ios.buildReactNativeFromSource',
+      propValueGetter: (config) => config.ios?.buildReactNativeFromSource?.toString(),
+    },
+  ],
+  'withIosBuildProperties'
+);
+
+export const withIosDeploymentTarget: ConfigPlugin<PluginConfigType> = (config, props) => {
+  const deploymentTarget = props.ios?.deploymentTarget;
+  if (!deploymentTarget) {
+    return config;
+  }
+
+  // Updates deployment target in app xcodeproj
+  config = withIosDeploymentTargetXcodeProject(config, { deploymentTarget });
+
+  // Updates deployement target in Podfile (Pods project)
+  config = withIosDeploymentTargetPodfile(config, props);
+
+  return config;
+};
+
+export const withIosInfoPlist: ConfigPlugin<PluginConfigType> = (config, props) => {
+  const reactNativeReleaseLevel = props.ios?.reactNativeReleaseLevel;
+  if (reactNativeReleaseLevel) {
+    config = withIosReactNativeReleaseLevel(config, { reactNativeReleaseLevel });
+  }
+
+  return config;
+};
+
+const withIosReactNativeReleaseLevel: ConfigPlugin<{
+  reactNativeReleaseLevel: 'stable' | 'canary' | 'experimental';
+}> = (config, { reactNativeReleaseLevel }) => {
+  return withInfoPlist(config, (config) => {
+    config.modResults['ReactNativeReleaseLevel'] = reactNativeReleaseLevel;
+    return config;
+  });
+};
+
+const withIosDeploymentTargetXcodeProject: ConfigPlugin<{ deploymentTarget: string }> = (
+  config,
+  props
+) => {
+  return withXcodeProject(config, (config) => {
+    config.modResults = updateDeploymentTargetXcodeProject(
+      config.modResults,
+      props.deploymentTarget
+    );
+    return config;
+  });
+};
+
+function updateDeploymentTargetXcodeProject(
+  project: XcodeProject,
+  deploymentTarget: string
+): XcodeProject {
+  const { Target } = IOSConfig;
+  const targetBuildConfigListIds = Target.getNativeTargets(project)
+    .filter(([_, target]) => Target.isTargetOfType(target, Target.TargetType.APPLICATION))
+    .map(([_, target]) => target.buildConfigurationList);
+
+  for (const buildConfigListId of targetBuildConfigListIds) {
+    for (const [, configurations] of IOSConfig.XcodeUtils.getBuildConfigurationsForListId(
+      project,
+      buildConfigListId
+    )) {
+      const { buildSettings } = configurations;
+      if (buildSettings?.IPHONEOS_DEPLOYMENT_TARGET) {
+        buildSettings.IPHONEOS_DEPLOYMENT_TARGET = deploymentTarget;
+      }
+    }
+  }
+  return project;
+}
+
+const withIosDeploymentTargetPodfile = createBuildPodfilePropsConfigPlugin<PluginConfigType>(
+  [
+    {
+      propName: 'ios.deploymentTarget',
+      propValueGetter: (config) => config.ios?.deploymentTarget,
+    },
+  ],
+  'withIosDeploymentTargetPodfile'
+);

@@ -1,0 +1,9 @@
+{
+  "platforms": ["apple", "android", "web"],
+  "apple": {
+    "modules": ["CameraViewModule"]
+  },
+  "android": {
+    "modules": ["expo.modules.camera.CameraViewModule"]
+  }
+}

@@ -1,0 +1,58 @@
+{
+  "expo": {
+    "name": "expo-home",
+    "description": "",
+    "slug": "vibra-code",
+    "privacy": "unlisted",
+    "sdkVersion": "54.0.0",
+    "version": "54.0.6",
+    "platforms": [
+      "ios",
+      "android"
+    ],
+    "primaryColor": "#cccccc",
+    "icon": "https://s3.amazonaws.com/exp-brand-assets/ExponentEmptyManifest_192.png",
+    "updates": {
+      "enabled": true,
+      "checkAutomatically": "ON_LOAD",
+      "fallbackToCacheTimeout": 60000,
+      "url": "https://u.expo.dev/YOUR_EAS_PROJECT_ID"
+    },
+    "userInterfaceStyle": "automatic",
+    "ios": {
+      "supportsTablet": false,
+      "bundleIdentifier": "host.exp.exponent"
+    },
+    "newArchEnabled": true,
+    "android": {
+      "package": "host.exp.exponent"
+    },
+    "androidStatusBar": {
+      "barStyle": "dark-content"
+    },
+    "scheme": "exp",
+    "jsEngine": "hermes",
+    "extra": {
+      "eas": {
+        "projectId": "YOUR_EAS_PROJECT_ID"
+      },
+      "revenueCatIosApiKey": "YOUR_IOS_API_KEY_HERE",
+      "revenueCatAndroidApiKey": "YOUR_ANDROID_API_KEY_HERE"
+    },
+    "runtimeVersion": "54.0.0",
+    "assetBundlePatterns": [
+      "**/*"
+    ],
+    "plugins": [
+      [
+        "expo-font",
+        {
+          "fonts": [
+            "node_modules/@expo/vector-icons/build/vendor/react-native-vector-icons/Fonts/Ionicons.ttf",
+            "node_modules/@expo/vector-icons/build/vendor/react-native-vector-icons/Fonts/MaterialIcons.ttf"
+          ]
+        }
+      ]
+    ]
+  }
+}

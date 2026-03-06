@@ -1,0 +1,76 @@
+{
+  "name": "expo-updates",
+  "version": "29.0.16",
+  "description": "Fetches and manages remotely-hosted assets and updates to your app's JS bundle.",
+  "main": "build/index.js",
+  "types": "build/index.d.ts",
+  "sideEffects": false,
+  "bin": {
+    "expo-updates": "bin/cli.js"
+  },
+  "scripts": {
+    "build": "expo-module build",
+    "clean": "expo-module clean",
+    "lint": "expo-module lint",
+    "test": "expo-module test",
+    "prepare": "expo-module prepare",
+    "prepublishOnly": "expo-module prepublishOnly",
+    "expo-module": "expo-module",
+    "test:e2e-cli": "yarn run prepare && expo-module test --config e2e-cli/jest.config.js"
+  },
+  "keywords": [
+    "react-native",
+    "expo",
+    "updates"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/expo/expo.git",
+    "directory": "packages/expo-updates"
+  },
+  "bugs": {
+    "url": "https://github.com/expo/expo/issues"
+  },
+  "author": "650 Industries, Inc.",
+  "license": "MIT",
+  "homepage": "https://docs.expo.dev/versions/latest/sdk/updates/",
+  "jest": {
+    "preset": "expo-module-scripts"
+  },
+  "dependencies": {
+    "@expo/code-signing-certificates": "^0.0.6",
+    "@expo/plist": "^0.4.8",
+    "@expo/spawn-async": "^1.7.2",
+    "arg": "4.1.0",
+    "chalk": "^4.1.2",
+    "debug": "^4.3.4",
+    "expo-eas-client": "~1.0.8",
+    "expo-manifests": "~1.0.10",
+    "expo-structured-headers": "~5.0.0",
+    "expo-updates-interface": "~2.0.0",
+    "getenv": "^2.0.0",
+    "glob": "^13.0.0",
+    "ignore": "^5.3.1",
+    "resolve-from": "^5.0.0"
+  },
+  "devDependencies": {
+    "@types/jest": "^29.2.1",
+    "@types/js-yaml": "^4.0.9",
+    "@types/node": "^22.14.0",
+    "@types/node-forge": "^1.0.0",
+    "@types/picomatch": "^4.0.0",
+    "@vercel/ncc": "^0.38.3",
+    "expo-module-scripts": "^5.0.8",
+    "express": "^5.1.0",
+    "form-data": "^4.0.4",
+    "js-yaml": "^4.1.0",
+    "memfs": "^3.2.0",
+    "picomatch": "^4.0.2",
+    "xstate": "^4.37.2"
+  },
+  "peerDependencies": {
+    "expo": "*",
+    "react": "*",
+    "react-native": "*"
+  }
+}

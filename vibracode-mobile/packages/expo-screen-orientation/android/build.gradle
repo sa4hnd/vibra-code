@@ -1,0 +1,15 @@
+plugins {
+  id 'com.android.library'
+  id 'expo-module-gradle-plugin'
+}
+
+group = 'host.exp.exponent'
+version = '9.0.8'
+
+android {
+  namespace "expo.modules.screenorientation"
+  defaultConfig {
+    versionCode 7
+    versionName '9.0.8'
+  }
+}

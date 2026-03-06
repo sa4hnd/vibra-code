@@ -1,0 +1,55 @@
+{
+  "name": "expo-dev-menu",
+  "version": "7.0.18",
+  "description": "Expo/React Native module with the developer menu.",
+  "main": "build/DevMenu.js",
+  "types": "build/DevMenu.d.ts",
+  "sideEffects": false,
+  "scripts": {
+    "build": "expo-module build",
+    "clean": "expo-module clean",
+    "lint": "expo-module lint",
+    "test": "expo-module test",
+    "prepare": "expo-module prepare",
+    "prepublishOnly": "expo-module prepublishOnly",
+    "expo-module": "expo-module"
+  },
+  "keywords": [
+    "expo",
+    "react-native",
+    "dev-menu",
+    "dev",
+    "menu"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/expo/expo.git",
+    "directory": "packages/expo-dev-menu"
+  },
+  "bugs": {
+    "url": "https://github.com/expo/expo/issues"
+  },
+  "author": "650 Industries, Inc.",
+  "license": "MIT",
+  "homepage": "https://docs.expo.dev",
+  "dependencies": {
+    "expo-dev-menu-interface": "2.0.0"
+  },
+  "devDependencies": {
+    "@apollo/client": "^3.4.10",
+    "@babel/preset-typescript": "^7.7.4",
+    "@testing-library/react-native": "^13.2.0",
+    "babel-plugin-module-resolver": "^5.0.0",
+    "babel-preset-expo": "~54.0.9",
+    "expo-dev-client-components": "3.0.8",
+    "expo-module-scripts": "^5.0.8",
+    "fuse.js": "^6.4.6",
+    "react": "19.1.0",
+    "react-native": "0.81.5",
+    "url": "^0.11.0",
+    "use-subscription": "^1.8.0"
+  },
+  "peerDependencies": {
+    "expo": "*"
+  }
+}

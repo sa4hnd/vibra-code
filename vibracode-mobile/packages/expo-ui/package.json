@@ -1,0 +1,61 @@
+{
+  "name": "@expo/ui",
+  "version": "0.2.0-beta.9",
+  "description": "A collection of UI components",
+  "sideEffects": false,
+  "exports": {
+    "./package.json": "./package.json",
+    "./swift-ui": {
+      "types": "./build/swift-ui/index.d.ts",
+      "default": "./src/swift-ui/index.tsx"
+    },
+    "./swift-ui/modifiers": {
+      "types": "./build/swift-ui/modifiers/index.d.ts",
+      "default": "./src/swift-ui/modifiers/index.ts"
+    },
+    "./jetpack-compose": {
+      "types": "./build/jetpack-compose/index.d.ts",
+      "default": "./src/jetpack-compose/index.ts"
+    },
+    "./jetpack-compose-primitives": {
+      "types": "./build/jetpack-compose-primitives/index.d.ts",
+      "default": "./src/jetpack-compose-primitives/index.tsx"
+    }
+  },
+  "scripts": {
+    "build": "expo-module build",
+    "clean": "expo-module clean",
+    "lint": "expo-module lint",
+    "test": "expo-module test",
+    "prepare": "expo-module prepare",
+    "prepublishOnly": "expo-module prepublishOnly",
+    "expo-module": "expo-module"
+  },
+  "homepage": "https://docs.expo.dev/versions/latest/sdk/ui/",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/expo/expo.git",
+    "directory": "packages/expo-ui"
+  },
+  "keywords": [
+    "react-native",
+    "expo",
+    "UI components",
+    "SwiftUI",
+    "Jetpack Compose"
+  ],
+  "author": "650 Industries, Inc.",
+  "license": "MIT",
+  "dependencies": {
+    "sf-symbols-typescript": "^2.1.0"
+  },
+  "devDependencies": {
+    "@types/react": "~19.1.10",
+    "expo-module-scripts": "^5.0.8"
+  },
+  "peerDependencies": {
+    "expo": "*",
+    "react": "*",
+    "react-native": "*"
+  }
+}

@@ -1,0 +1,29 @@
+name: Build and Submit iOS
+
+on:
+  push:
+    branches: ['main']
+
+jobs:
+  # Step 1: Publish JS bundle via EAS Update
+  publish_update:
+    type: update
+    params:
+      platform: ios
+      branch: production
+      message: "Production update"
+
+  # Step 2: Build iOS app
+  build_ios:
+    type: build
+    needs: [publish_update]
+    params:
+      platform: ios
+      profile: release-client
+
+  # Step 3: Submit to App Store
+  submit_ios:
+    type: submit
+    needs: [build_ios]
+    params:
+      platform: ios

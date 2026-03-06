@@ -1,0 +1,15 @@
+plugins {
+  id 'com.android.library'
+  id 'expo-module-gradle-plugin'
+}
+
+group = 'host.exp.exponent'
+version = '8.0.8'
+
+android {
+  namespace "expo.modules.network"
+  defaultConfig {
+    versionCode 11
+    versionName '8.0.8'
+  }
+}

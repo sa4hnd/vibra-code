@@ -1,0 +1,19 @@
+plugins {
+  id 'com.android.library'
+  id 'expo-module-gradle-plugin'
+}
+
+group = 'host.exp.exponent'
+version = '10.0.8'
+
+android {
+  namespace "expo.modules.videothumbnails"
+  defaultConfig {
+    versionCode 14
+    versionName '10.0.8'
+  }
+}
+
+dependencies {
+  api "androidx.annotation:annotation:1.0.0"
+}

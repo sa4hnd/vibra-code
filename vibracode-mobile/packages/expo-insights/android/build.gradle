@@ -1,0 +1,20 @@
+plugins {
+  id 'com.android.library'
+  id 'expo-module-gradle-plugin'
+}
+
+group = 'host.exp.exponent'
+version = '0.10.8'
+
+android {
+  namespace "expo.modules.insights"
+  defaultConfig {
+    versionCode 1
+    versionName "0.10.8"
+  }
+}
+
+dependencies {
+  implementation project(':expo-eas-client')
+  implementation "com.facebook.react:react-android"
+}

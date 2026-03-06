@@ -1,0 +1,239 @@
+export const nonLinkableTypes = [
+  '_default',
+  'AndroidBarcode',
+  'ArrayBufferView',
+  'B',
+  'Buffer',
+  'BufferEncoding',
+  'BufferSource',
+  'CodedError',
+  'ColorValue',
+  'ComponentClass',
+  'ComponentProps',
+  'ComponentType',
+  'DependencyList',
+  'E',
+  'EmitterSubscription',
+  'EventName',
+  'EventSubscription',
+  'FileSystemDirectory',
+  'FileSystemFile',
+  'ForwardRefExoticComponent',
+  'FunctionComponent',
+  'GeneratedHref',
+  'GestureResponderEvent',
+  'GetPermissionMethod',
+  'InferEventParameter',
+  'K',
+  'Listener',
+  'ModuleType',
+  'NativeBoundaryEventCallback',
+  'NativeSyntheticEvent',
+  'NavigationContainerRefWithCurrent',
+  'NotificationTimeoutError',
+  'Options',
+  'P',
+  'Parameters',
+  'ParamList',
+  'ParamListBase',
+  'ParsedQs',
+  'PartialState',
+  'PathUtilities',
+  'PermissionResponse',
+  'PermissionHookBehavior',
+  'PermissionHookOptions',
+  'PropsWithChildren',
+  'PropsWithoutRef',
+  'ProxyNativeModule',
+  'React.FC',
+  'RequestPermissionMethod',
+  'RouteInputParams',
+  'RouteOutputParams',
+  'RouteParamInput',
+  'RouteParams',
+  'RouteSegments',
+  'ScreenListeners',
+  'ServiceActionResult',
+  'SourceSkipsKeys',
+  'StyleProp',
+  'T',
+  'TaskOptions',
+  'TEventListener',
+  'TEventMap',
+  'TEventName',
+  'TEventsMap',
+  'TInitialValue',
+  'TOptions',
+  'TParams',
+  'TRoute',
+  'TSegments',
+  'TState',
+  'UnknownInputParams',
+  'UnknownOutputParams',
+];
+
+/**
+ * List of type names that should not be visible in the docs.
+ */
+export const omittableTypes = [
+  // Internal React type that adds `ref` prop to the component
+  'RefAttributes',
+];
+
+/**
+ * Map of internal entity/type names that should be replaced with something more developer-friendly.
+ */
+export const replaceableTypes: Partial<Record<string, string>> = {
+  ForwardRefExoticComponent: 'Component',
+  LocationAccuracy: 'Accuracy',
+  LocationGeofencingRegionState: 'GeofencingRegionState',
+  LocationActivityType: 'ActivityType',
+};
+
+/**
+ * Map of entity/type names that should be linked to user specified source, internal or external.
+ */
+export const hardcodedTypeLinks: Record<string, string> = {
+  ArrayBuffer:
+    'https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/ArrayBuffer',
+  Asset: '/versions/latest/sdk/asset/#asset',
+  AsyncIterableIterator:
+    'https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/AsyncIterator',
+  AuthSessionOpenOptions: '/versions/latest/sdk/webbrowser/#authsessionopenoptions',
+  AVMetadata: '/versions/latest/sdk/av/#avmetadata',
+  AVPlaybackSource: '/versions/latest/sdk/av/#avplaybacksource',
+  AVPlaybackStatus: '/versions/latest/sdk/av/#avplaybackstatus',
+  AVPlaybackStatusToSet: '/versions/latest/sdk/av/#avplaybackstatustoset',
+  AudioSampleCallback: '/versions/latest/sdk/av/#avplaybackstatustoset',
+  Blob: 'https://developer.mozilla.org/en-US/docs/Web/API/Blob',
+  CameraPosition: '/versions/latest/sdk/maps/#cameraposition-2',
+  ColorValue: 'https://reactnative.dev/docs/colors',
+  Component: 'https://react.dev/reference/react/Component',
+  CreateURLOptions: '/versions/latest/sdk/linking/#createurloptions',
+  Date: 'https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date',
+  DeviceSensor: '/versions/latest/sdk/sensors',
+  Element: 'https://www.typescriptlang.org/docs/handbook/jsx.html#function-component',
+  Error: 'https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Error',
+  Exclude:
+    'https://www.typescriptlang.org/docs/handbook/utility-types.html#excludeuniontype-excludedmembers',
+  ExpoConfig:
+    'https://github.com/expo/expo/blob/main/packages/%40expo/config-types/src/ExpoConfig.ts',
+  Extract: 'https://www.typescriptlang.org/docs/handbook/utility-types.html#extracttype-union',
+  // Conflicts with the File class from expo-file-system@next. TODO: Fix this.
+  // File: 'https://developer.mozilla.org/en-US/docs/Web/API/File',
+  FileList: 'https://developer.mozilla.org/en-US/docs/Web/API/FileList',
+  FileHookTransformFunction:
+    '/versions/latest/sdk/fingerprint/#filehooktransformfunctionsource-chunk-isendoffile-encoding',
+  HTMLAnchorElement: 'https://developer.mozilla.org/en-US/docs/Web/API/HTMLAnchorElement',
+  HTMLInputElement: 'https://developer.mozilla.org/en-US/docs/Web/API/HTMLInputElement',
+  IterableIterator:
+    'https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Iterator',
+  KeepAwakeListener: '/versions/latest/sdk/keep-awake/#keepawakelistenerevent',
+  LocationCallback: '/versions/latest/sdk/location/#locationcallbacklocation',
+  LocationErrorCallback: '/versions/latest/sdk/location/#locationerrorcallbackreason',
+  LocationHeadingCallback: '/versions/latest/sdk/location/#locationheadingcallbacklocation',
+  MediaTrackSettings: 'https://developer.mozilla.org/en-US/docs/Web/API/MediaTrackSettings',
+  MessageEvent: 'https://developer.mozilla.org/en-US/docs/Web/API/MessageEvent',
+  MouseEvent: 'https://developer.mozilla.org/en-US/docs/Web/API/MouseEvent',
+  Omit: 'https://www.typescriptlang.org/docs/handbook/utility-types.html#omittype-keys',
+  OrientationChangeListener:
+    '/versions/latest/sdk/screen-orientation/#orientationchangelistenerevent',
+  PackagerAsset: 'https://github.com/facebook/react-native/blob/main/packages/assets/registry.js',
+  Pick: 'https://www.typescriptlang.org/docs/handbook/utility-types.html#picktype-keys',
+  Partial: 'https://www.typescriptlang.org/docs/handbook/utility-types.html#partialtype',
+  Platform: 'https://reactnative.dev/docs/platform',
+  Playback: '/versions/latest/sdk/av/#playback',
+  Promise:
+    'https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise',
+  PromptMethod: '/versions/latest/sdk/auth-session/#promptmethodoptions',
+  PureComponent: 'https://react.dev/reference/react/PureComponent',
+  PushTokenListener: '/versions/latest/sdk/notifications/#pushtokenlistenertoken',
+  ReadableStream: 'https://developer.mozilla.org/en-US/docs/Web/API/ReadableStream',
+  ReactNode: 'https://reactnative.dev/docs/react-node',
+  Readonly: 'https://www.typescriptlang.org/docs/handbook/utility-types.html#readonlytype',
+  Required: 'https://www.typescriptlang.org/docs/handbook/utility-types.html#requiredtype',
+  SFSymbol: 'https://github.com/nandorojo/sf-symbols-typescript',
+  ShareOptions: 'https://reactnative.dev/docs/share#share',
+  SpeechSynthesisEvent: 'https://developer.mozilla.org/en-US/docs/Web/API/SpeechSynthesisEvent',
+  SpeechSynthesisUtterance:
+    'https://developer.mozilla.org/en-US/docs/Web/API/SpeechSynthesisUtterance',
+  SyntheticEvent: 'https://react.dev/reference/react-dom/components/common#react-event-object',
+  SQLiteStorageSetItemUpdateFunction:
+    '/versions/latest/sdk/sqlite/#sqlitestoragesetitemupdatefunctionprevvalue',
+  TaskManagerTaskExecutor: '/versions/latest/sdk/task-manager/#taskmanagertaskexecutorbody',
+  Text: 'https://reactnative.dev/docs/text',
+  TextProps: 'https://reactnative.dev/docs/text#props',
+  Uint8Array:
+    'https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Uint8Array',
+  URLListener: '/versions/latest/sdk/linking/#urllistenerevent',
+  View: 'https://reactnative.dev/docs/view',
+  ViewProps: 'https://reactnative.dev/docs/view#props',
+  ViewStyle: 'https://reactnative.dev/docs/view-style-props',
+  WebBrowserOpenOptions: '/versions/latest/sdk/webbrowser/#webbrowseropenoptions',
+  WebBrowserWindowFeatures: '/versions/latest/sdk/webbrowser/#webbrowserwindowfeatures',
+  WebGL2RenderingContext: 'https://developer.mozilla.org/en-US/docs/Web/API/WebGL2RenderingContext',
+  WebGLFramebuffer: 'https://developer.mozilla.org/en-US/docs/Web/API/WebGLFramebuffer',
+  WebGLTexture: 'https://developer.mozilla.org/en-US/docs/Web/API/WebGLTexture',
+
+  // React Navigation
+  DefaultNavigatorOptions:
+    'https://reactnavigation.org/docs/custom-navigators/#type-checking-navigators',
+  NavigationContainerRef: 'https://reactnavigation.org/docs/navigating-without-navigation-prop',
+  NavigationOptions: 'https://reactnavigation.org/docs/screen-options/',
+  NavigationState: 'https://reactnavigation.org/docs/navigation-state',
+  NavigatorID: 'https://reactnavigation.org/docs/custom-navigators/#type-checking-navigators',
+  RouteProp: 'https://reactnavigation.org/docs/glossary-of-terms/#route-object',
+  RootParamList: 'https://reactnavigation.org/docs/typescript/#navigator-specific-types',
+  TabRouterOptions: 'https://reactnavigation.org/docs/custom-navigators/#type-checking-navigators',
+  TabNavigationState:
+    'https://reactnavigation.org/docs/custom-navigators/#type-checking-navigators',
+};
+
+export const sdkVersionHardcodedTypeLinks: Record<string, Record<string, string | null>> = {
+  'v52.0.0': {
+    EventEmitter: '/versions/v52.0.0/sdk/expo/#eventemitter',
+    NativeModule: '/versions/v52.0.0/sdk/expo/#nativemodule',
+    SharedObject: '/versions/v52.0.0/sdk/expo/#sharedobject',
+    SharedRef: '/versions/v52.0.0/sdk/expo/#sharedref',
+    BufferOptions: '/versions/v52.0.0/sdk/video/#bufferoptions-1',
+    CameraPosition: '/versions/v52.0.0/sdk/maps/#cameraposition-2',
+  },
+  'v53.0.0': {
+    EventEmitter: '/versions/v53.0.0/sdk/expo/#eventemitter',
+    NativeModule: '/versions/v53.0.0/sdk/expo/#nativemodule',
+    SharedObject: '/versions/v53.0.0/sdk/expo/#sharedobject',
+    SharedRef: '/versions/v53.0.0/sdk/expo/#sharedref',
+    CameraPosition: '/versions/v53.0.0/sdk/maps/#cameraposition-2',
+  },
+  'v54.0.0': {
+    EventEmitter: '/versions/v54.0.0/sdk/expo/#eventemittertype',
+    NativeModule: '/versions/v54.0.0/sdk/expo/#nativemoduletype',
+    SharedObject: '/versions/v54.0.0/sdk/expo/#sharedobjecttype',
+    SharedRef: '/versions/v54.0.0/sdk/expo/#sharedreftype',
+    Href: '/versions/v54.0.0/sdk/router/#href-1',
+    BufferOptions: '/versions/v54.0.0/sdk/video/#bufferoptions-1',
+    CameraPosition: '/versions/v54.0.0/sdk/maps/#cameraposition-2',
+  },
+  latest: {
+    EventEmitter: '/versions/latest/sdk/expo/#eventemittertype',
+    NativeModule: '/versions/latest/sdk/expo/#nativemoduletype',
+    SharedObject: '/versions/latest/sdk/expo/#sharedobjecttype',
+    SharedRef: '/versions/latest/sdk/expo/#sharedreftype',
+    Href: '/versions/latest/sdk/router/#href-1',
+    BufferOptions: '/versions/latest/sdk/video/#bufferoptions-1',
+    CameraPosition: '/versions/latest/sdk/maps/#cameraposition-2',
+  },
+  unversioned: {
+    EventEmitter: '/versions/unversioned/sdk/expo/#eventemittertype',
+    NativeModule: '/versions/unversioned/sdk/expo/#nativemoduletype',
+    SharedObject: '/versions/unversioned/sdk/expo/#sharedobjecttype',
+    SharedRef: '/versions/unversioned/sdk/expo/#sharedreftype',
+    Href: '/versions/unversioned/sdk/router/#href-1',
+    BufferOptions: '/versions/unversioned/sdk/video/#bufferoptions-1',
+    CameraPosition: '/versions/unversioned/sdk/maps/#cameraposition-2',
+  },
+};
+
+export const packageLinks: Record<string, string> = {
+  'expo-manifests': 'manifests',
+};

@@ -1,0 +1,23 @@
+plugins {
+  id 'com.android.library'
+  id 'expo-module-gradle-plugin'
+}
+
+group = 'host.exp.exponent'
+version = '15.0.8'
+
+android {
+  namespace "expo.modules.calendar"
+  defaultConfig {
+    versionCode 17
+    versionName '15.0.8'
+  }
+}
+
+dependencies {
+  implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.4.3")
+  implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.4.1")
+
+  testImplementation 'junit:junit:4.13.2'
+  testImplementation 'io.mockk:mockk:1.13.5'
+}

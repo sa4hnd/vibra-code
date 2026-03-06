@@ -1,0 +1,25 @@
+plugins {
+  id 'com.android.library'
+  id 'expo-module-gradle-plugin'
+}
+
+group = 'host.exp.exponent'
+version = '2.0.0'
+
+expoModule {
+  canBePublished false
+}
+
+android {
+  namespace "expo.interfaces.devmenu"
+  defaultConfig {
+    versionCode 6
+    versionName '2.0.0'
+  }
+}
+
+dependencies {
+  implementation 'com.facebook.react:react-android'
+  implementation 'com.squareup.okhttp3:okhttp:3.14.9'
+  implementation "org.jetbrains.kotlinx:kotlinx-coroutines-core:1.4.3"
+}

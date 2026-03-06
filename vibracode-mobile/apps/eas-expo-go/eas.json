@@ -1,0 +1,170 @@
+{
+  "cli": {
+    "version": ">= 0.52.0",
+    "requireCommit": true,
+    "appVersionSource": "remote",
+    "promptToConfigurePushNotifications": false
+  },
+  "build": {
+    "base": {
+      "node": "22.17.1",
+      "credentialsSource": "remote",
+      "android": {
+        "image": "sdk-54",
+        "resourceClass": "medium",
+        "env": {
+          "EAS_BUILD_PLATFORM": "android",
+          "EAS_DANGEROUS_OVERRIDE_ANDROID_APPLICATION_ID": "host.exp.exponent",
+          "EXPO_ROOT_DIR": "/home/expo/workingdir/build",
+          "SHARP_IGNORE_GLOBAL_LIBVIPS": "1",
+          "EAS_BUILD_DISABLE_BUNDLE_JAVASCRIPT_STEP": "0"
+        }
+      },
+      "ios": {
+        "image": "sdk-54",
+        "cocoapods": "1.16.2",
+        "resourceClass": "medium",
+        "env": {
+          "EAS_BUILD_PLATFORM": "ios",
+          "EXPO_ROOT_DIR": "/Users/expo/workingdir/build",
+          "SHARP_IGNORE_GLOBAL_LIBVIPS": "1",
+          "EAS_BUILD_DISABLE_BUNDLE_JAVASCRIPT_STEP": "0"
+        }
+      }
+    },
+    "versioned-client": {
+      "extends": "base",
+      "env": {
+        "EAS_BUILD_PROFILE": "versioned-client"
+      },
+      "channel": "development",
+      "android": {
+        "gradleCommand": ":app:assembleMobileDebug",
+        "withoutCredentials": true
+      },
+      "ios": {
+        "scheme": "Expo Go",
+        "simulator": false,
+        "buildConfiguration": "Release"
+      }
+    },
+    "versioned-client-add-sdk": {
+      "extends": "versioned-client",
+      "env": {
+        "EAS_BUILD_PROFILE": "versioned-client-add-sdk"
+      }
+    },
+    "unversioned-client": {
+      "extends": "base",
+      "env": {
+        "EAS_BUILD_PROFILE": "unversioned-client"
+      },
+      "android": {
+        "gradleCommand": ":app:assembleMobileDebug",
+        "withoutCredentials": true
+      },
+      "ios": {
+        "scheme": "Expo Go",
+        "simulator": true,
+        "buildConfiguration": "Release"
+      }
+    },
+    "release-client": {
+      "extends": "versioned-client",
+      "env": {
+        "EAS_BUILD_PROFILE": "release-client"
+      },
+      "channel": "production",
+      "android": {
+        "autoIncrement": "versionCode",
+        "cache": {
+          "disabled": true
+        },
+        "withoutCredentials": false,
+        "gradleCommand": ":app:bundleMobileRelease"
+      },
+      "ios": {
+        "autoIncrement": "buildNumber",
+        "resourceClass": "medium",
+        "cache": {
+          "disabled": true
+        },
+        "simulator": false,
+        "enterpriseProvisioning": "universal"
+      }
+    },
+    "publish-client": {
+      "extends": "versioned-client",
+      "env": {
+        "EAS_BUILD_PROFILE": "publish-client"
+      },
+      "channel": "preview",
+      "android": {
+        "autoIncrement": "versionCode",
+        "cache": {
+          "disabled": true
+        },
+        "withoutCredentials": false,
+        "gradleCommand": ":app:assembleMobileRelease"
+      },
+      "ios": {
+        "resourceClass": "medium",
+        "autoIncrement": "buildNumber",
+        "cache": {
+          "disabled": true
+        },
+        "simulator": true
+      }
+    },
+    "versioned-quest-client": {
+      "extends": "versioned-client",
+      "android": {
+        "gradleCommand": ":app:assembleQuestDebug"
+      }
+    },
+    "versioned-quest-client-add-sdk": {
+      "extends": "versioned-quest-client",
+      "env": {
+        "EAS_BUILD_PROFILE": "versioned-client-add-sdk"
+      }
+    },
+    "unversioned-quest-client": {
+      "extends": "unversioned-client",
+      "android": {
+        "gradleCommand": ":app:assembleQuestDebug"
+      }
+    },
+    "release-quest-client": {
+      "extends": "release-client",
+      "env": {
+        "EAS_BUILD_PROFILE": "release-client"
+      },
+      "android": {
+        "gradleCommand": ":app:bundleQuestRelease"
+      }
+    },
+    "publish-quest-client": {
+      "extends": "publish-client",
+      "android": {
+        "gradleCommand": ":app:assembleQuestRelease"
+      }
+    },
+    "production": {
+      "extends": "release-client",
+      "channel": "production",
+      "env": {
+        "EAS_BUILD_PROFILE": "production"
+      }
+    }
+  },
+  "submit": {
+    "release-client": {
+      "ios": {
+        "ascAppId": "6752743077"
+      },
+      "android": {
+        "track": "production"
+      }
+    }
+  }
+}

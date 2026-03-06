@@ -1,0 +1,25 @@
+{
+  "name": "expo-dev-launcher",
+  "title": "Expo Development Launcher",
+  "version": "6.0.20",
+  "description": "Pre-release version of the Expo development launcher package for testing.",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/expo/expo.git",
+    "directory": "packages/expo-dev-launcher"
+  },
+  "keywords": [
+    "react-native"
+  ],
+  "author": "650 Industries, Inc.",
+  "license": "MIT",
+  "homepage": "https://docs.expo.dev",
+  "dependencies": {
+    "ajv": "^8.11.0",
+    "expo-dev-menu": "7.0.18",
+    "expo-manifests": "~1.0.10"
+  },
+  "peerDependencies": {
+    "expo": "*"
+  }
+}

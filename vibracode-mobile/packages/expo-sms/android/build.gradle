@@ -1,0 +1,25 @@
+plugins {
+  id 'com.android.library'
+  id 'expo-module-gradle-plugin'
+}
+
+group = 'host.exp.exponent'
+version = '14.0.8'
+
+android {
+  namespace "expo.modules.sms"
+  defaultConfig {
+    versionCode 28
+    versionName "14.0.8"
+  }
+}
+
+dependencies {
+  implementation 'androidx.annotation:annotation:1.1.0'
+
+  if (project.findProject(':expo-modules-test-core')) {
+    testImplementation project(':expo-modules-test-core')
+  }
+  testImplementation "org.robolectric:robolectric:4.10"
+  testImplementation 'junit:junit:4.13.2'
+}

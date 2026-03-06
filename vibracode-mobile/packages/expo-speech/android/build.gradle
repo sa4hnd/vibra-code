@@ -1,0 +1,15 @@
+plugins {
+  id 'com.android.library'
+  id 'expo-module-gradle-plugin'
+}
+
+group = 'host.exp.exponent'
+version = '14.0.8'
+
+android {
+  namespace "expo.modules.speech"
+  defaultConfig {
+    versionCode 18
+    versionName "14.0.8"
+  }
+}

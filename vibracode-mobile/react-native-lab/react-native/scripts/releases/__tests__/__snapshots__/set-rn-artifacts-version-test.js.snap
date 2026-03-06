@@ -1,0 +1,257 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`updateReactNativeArtifacts should set nightly version: packages/react-native/Libraries/Core/ReactNativeVersion.js 1`] = `
+"/**
+ * Copyright (c) Meta Platforms, Inc. and affiliates.
+ *
+ * This source code is licensed under the MIT license found in the
+ * LICENSE file in the root directory of this source tree.
+ *
+ * @flow strict
+ * @noformat
+ * << GENERATED >>
+ */
+
+export const version: $ReadOnly<{
+  major: number,
+  minor: number,
+  patch: number,
+  prerelease: string | null,
+}> = {
+  major: 0,
+  minor: 81,
+  patch: 0,
+  prerelease: 'nightly-29282302-abcd1234',
+};
+"
+`;
+
+exports[`updateReactNativeArtifacts should set nightly version: packages/react-native/React/Base/RCTVersion.m 1`] = `
+"/**
+ * Copyright (c) Meta Platforms, Inc. and affiliates.
+ *
+ * This source code is licensed under the MIT license found in the
+ * LICENSE file in the root directory of this source tree.
+ *
+ * << GENERATED >>
+ */
+
+#import \\"RCTVersion.h\\"
+
+NSString* const RCTVersionMajor = @\\"major\\";
+NSString* const RCTVersionMinor = @\\"minor\\";
+NSString* const RCTVersionPatch = @\\"patch\\";
+NSString* const RCTVersionPrerelease = @\\"prerelease\\";
+
+
+NSDictionary* RCTGetReactNativeVersion(void)
+{
+  static NSDictionary* __rnVersion;
+  static dispatch_once_t onceToken;
+  dispatch_once(&onceToken, ^(void){
+    __rnVersion = @{
+                  RCTVersionMajor: @(0),
+                  RCTVersionMinor: @(81),
+                  RCTVersionPatch: @(0),
+                  RCTVersionPrerelease: @\\"nightly-29282302-abcd1234\\",
+                  };
+  });
+  return __rnVersion;
+}
+"
+`;
+
+exports[`updateReactNativeArtifacts should set nightly version: packages/react-native/ReactAndroid/gradle.properties 1`] = `
+"VERSION_NAME=0.81.0-nightly-29282302-abcd1234
+"
+`;
+
+exports[`updateReactNativeArtifacts should set nightly version: packages/react-native/ReactAndroid/src/main/java/com/facebook/react/modules/systeminfo/ReactNativeVersion.kt 1`] = `
+"/**
+ * Copyright (c) Meta Platforms, Inc. and affiliates.
+ *
+ * This source code is licensed under the MIT license found in the
+ * LICENSE file in the root directory of this source tree.
+ *
+ * << GENERATED >>
+ */
+
+package com.facebook.react.modules.systeminfo
+
+public object ReactNativeVersion {
+  @JvmField
+  public val VERSION: Map<String, Any?> = mapOf(
+    \\"major\\" to 0,
+    \\"minor\\" to 81,
+    \\"patch\\" to 0,
+    \\"prerelease\\" to \\"nightly-29282302-abcd1234\\"
+  )
+}
+"
+`;
+
+exports[`updateReactNativeArtifacts should set nightly version: packages/react-native/ReactCommon/cxxreact/ReactNativeVersion.h 1`] = `
+"/**
+ * Copyright (c) Meta Platforms, Inc. and affiliates.
+ *
+ * This source code is licensed under the MIT license found in the
+ * LICENSE file in the root directory of this source tree.
+ *
+ * << GENERATED >>
+ */
+
+#pragma once
+
+#include <cstdint>
+#include <string_view>
+
+#define REACT_NATIVE_VERSION_MAJOR 0
+#define REACT_NATIVE_VERSION_MINOR 81
+#define REACT_NATIVE_VERSION_PATCH 0
+
+namespace facebook::react {
+
+constexpr struct {
+  int32_t Major = 0;
+  int32_t Minor = 81;
+  int32_t Patch = 0;
+  std::string_view Prerelease = \\"nightly-29282302-abcd1234\\";
+} ReactNativeVersion;
+
+} // namespace facebook::react
+"
+`;
+
+exports[`updateReactNativeArtifacts should set nightly version: packages/react-native/scripts/codegen/__tests__/__snapshots__/generate-artifacts-executor-test.js.snap 1`] = `
+"version = \\"0.81.0-nightly-29282302-abcd1234\\\\
+other text
+version = \\"0.81.0-nightly-29282302-abcd1234\\\\"
+`;
+
+exports[`updateReactNativeArtifacts should set release version: packages/react-native/Libraries/Core/ReactNativeVersion.js 1`] = `
+"/**
+ * Copyright (c) Meta Platforms, Inc. and affiliates.
+ *
+ * This source code is licensed under the MIT license found in the
+ * LICENSE file in the root directory of this source tree.
+ *
+ * @flow strict
+ * @noformat
+ * << GENERATED >>
+ */
+
+export const version: $ReadOnly<{
+  major: number,
+  minor: number,
+  patch: number,
+  prerelease: string | null,
+}> = {
+  major: 0,
+  minor: 81,
+  patch: 0,
+  prerelease: null,
+};
+"
+`;
+
+exports[`updateReactNativeArtifacts should set release version: packages/react-native/React/Base/RCTVersion.m 1`] = `
+"/**
+ * Copyright (c) Meta Platforms, Inc. and affiliates.
+ *
+ * This source code is licensed under the MIT license found in the
+ * LICENSE file in the root directory of this source tree.
+ *
+ * << GENERATED >>
+ */
+
+#import \\"RCTVersion.h\\"
+
+NSString* const RCTVersionMajor = @\\"major\\";
+NSString* const RCTVersionMinor = @\\"minor\\";
+NSString* const RCTVersionPatch = @\\"patch\\";
+NSString* const RCTVersionPrerelease = @\\"prerelease\\";
+
+
+NSDictionary* RCTGetReactNativeVersion(void)
+{
+  static NSDictionary* __rnVersion;
+  static dispatch_once_t onceToken;
+  dispatch_once(&onceToken, ^(void){
+    __rnVersion = @{
+                  RCTVersionMajor: @(0),
+                  RCTVersionMinor: @(81),
+                  RCTVersionPatch: @(0),
+                  RCTVersionPrerelease: [NSNull null],
+                  };
+  });
+  return __rnVersion;
+}
+"
+`;
+
+exports[`updateReactNativeArtifacts should set release version: packages/react-native/ReactAndroid/gradle.properties 1`] = `
+"VERSION_NAME=0.81.0
+"
+`;
+
+exports[`updateReactNativeArtifacts should set release version: packages/react-native/ReactAndroid/src/main/java/com/facebook/react/modules/systeminfo/ReactNativeVersion.kt 1`] = `
+"/**
+ * Copyright (c) Meta Platforms, Inc. and affiliates.
+ *
+ * This source code is licensed under the MIT license found in the
+ * LICENSE file in the root directory of this source tree.
+ *
+ * << GENERATED >>
+ */
+
+package com.facebook.react.modules.systeminfo
+
+public object ReactNativeVersion {
+  @JvmField
+  public val VERSION: Map<String, Any?> = mapOf(
+    \\"major\\" to 0,
+    \\"minor\\" to 81,
+    \\"patch\\" to 0,
+    \\"prerelease\\" to null
+  )
+}
+"
+`;
+
+exports[`updateReactNativeArtifacts should set release version: packages/react-native/ReactCommon/cxxreact/ReactNativeVersion.h 1`] = `
+"/**
+ * Copyright (c) Meta Platforms, Inc. and affiliates.
+ *
+ * This source code is licensed under the MIT license found in the
+ * LICENSE file in the root directory of this source tree.
+ *
+ * << GENERATED >>
+ */
+
+#pragma once
+
+#include <cstdint>
+#include <string_view>
+
+#define REACT_NATIVE_VERSION_MAJOR 0
+#define REACT_NATIVE_VERSION_MINOR 81
+#define REACT_NATIVE_VERSION_PATCH 0
+
+namespace facebook::react {
+
+constexpr struct {
+  int32_t Major = 0;
+  int32_t Minor = 81;
+  int32_t Patch = 0;
+  std::string_view Prerelease = \\"\\";
+} ReactNativeVersion;
+
+} // namespace facebook::react
+"
+`;
+
+exports[`updateReactNativeArtifacts should set release version: packages/react-native/scripts/codegen/__tests__/__snapshots__/generate-artifacts-executor-test.js.snap 1`] = `
+"version = \\"0.81.0\\\\
+other text
+version = \\"0.81.0\\\\"
+`;

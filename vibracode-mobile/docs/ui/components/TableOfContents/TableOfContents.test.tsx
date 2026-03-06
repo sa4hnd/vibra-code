@@ -1,0 +1,38 @@
+import { jest } from '@jest/globals';
+import GithubSlugger from 'github-slugger';
+
+import { HeadingManager, HeadingType } from '~/common/headingManager';
+import { renderWithHeadings } from '~/common/test-utilities';
+import { HeadingsContext } from '~/common/withHeadingManager';
+
+import { TableOfContents } from './TableOfContents';
+
+Object.defineProperty(window, 'matchMedia', {
+  writable: true,
+  value: jest.fn().mockImplementation(() => ({})),
+});
+
+const prepareHeadingManager = () => {
+  const headingManager = new HeadingManager(new GithubSlugger(), { headings: [] });
+  headingManager.addHeading('Base level heading', undefined, {});
+  headingManager.addHeading('Level 3 subheading', 3, {});
+  headingManager.addHeading('Code heading depth 1', 0, {
+    sidebarDepth: 1,
+    sidebarType: HeadingType.INLINE_CODE,
+  });
+
+  return headingManager;
+};
+
+describe('TableOfContents', () => {
+  test('correctly matches snapshot', () => {
+    const headingManager = prepareHeadingManager();
+
+    const { container } = renderWithHeadings(
+      <HeadingsContext.Provider value={headingManager}>
+        <TableOfContents headingManager={headingManager} />
+      </HeadingsContext.Provider>
+    );
+    expect(container).toMatchSnapshot();
+  });
+});

@@ -1,0 +1,3 @@
+[submodule "expo-template"]
+	path = expo-template
+	url = https://github.com/sa4hnd/expo-template.git

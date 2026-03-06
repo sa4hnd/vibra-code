@@ -1,0 +1,68 @@
+# Environment
+.env
+.env.*
+!.env.example
+
+# Keys and secrets (root and backend only - Expo test fixtures are OK)
+/*.pem
+/vibracode-backend/*.pem
+*.key
+!vibracode-mobile/packages/**/certificates/**/*.pem
+!vibracode-mobile/packages/**/fixtures/**/*.pem
+!vibracode-mobile/apps/**/expo-root.pem
+*.p12
+*.p8
+*_SECRET*
+credentials.json
+
+# Dependencies
+node_modules/
+
+# Build outputs
+.next/
+build/
+dist/
+DerivedData/
+*.xcarchive
+
+# iOS
+Pods/
+*.ipa
+
+# System
+.DS_Store
+Thumbs.db
+
+# IDE
+.idea/
+.vscode/
+*.swp
+*.swo
+
+# AI tool configs
+.auto-claude/
+.auto-claude-security.json
+.claude/
+.claude_settings.json
+.cursor/
+.windsurf/
+copilot/
+
+# Deployment / CI (remove for your own repo)
+.vercel/
+.github/
+.netlify/
+
+# Provisioning & signing (regenerate your own)
+*.mobileprovision
+*.certSigningRequest
+
+# Secrets directory
+secrets/
+
+# Misc
+*.log
+*.tmp
+.expo/
+__pycache__/
+*.pyc

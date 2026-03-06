@@ -1,0 +1,63 @@
+plugins {
+  id 'com.android.library'
+  id 'expo-module-gradle-plugin'
+}
+
+def reactNativeArchitectures() {
+    def value = project.getProperties().get("reactNativeArchitectures")
+    return value ? value.split(",") : ["armeabi-v7a", "x86", "x86_64", "arm64-v8a"]
+}
+
+group = 'host.exp.exponent'
+version = '16.0.9'
+
+android {
+  if (rootProject.hasProperty("ndkPath")) {
+    ndkPath rootProject.ext.ndkPath
+  }
+  if (rootProject.hasProperty("ndkVersion")) {
+    ndkVersion rootProject.ext.ndkVersion
+  }
+
+  namespace "expo.modules.gl"
+  defaultConfig {
+    versionCode 31
+    versionName "16.0.9"
+
+    externalNativeBuild {
+      cmake {
+        abiFilters (*reactNativeArchitectures())
+        arguments "-DANDROID_STL=c++_shared",
+          "-DANDROID_SUPPORT_FLEXIBLE_PAGE_SIZES=ON"
+      }
+    }
+  }
+
+  externalNativeBuild {
+    cmake {
+      path "CMakeLists.txt"
+    }
+  }
+
+  buildFeatures {
+    prefab true
+  }
+
+  packagingOptions {
+    // Gradle will add cmake target dependencies into packaging.
+    excludes += [
+        "**/libc++_shared.so",
+        "**/libjsi.so",
+    ]
+  }
+
+  configurations {
+    extractHeaders
+    extractJNI
+  }
+}
+
+dependencies {
+  compileOnly 'com.facebook.soloader:soloader:0.8.2'
+  compileOnly 'com.facebook.react:react-android'
+}

@@ -1,0 +1,19 @@
+plugins {
+  id 'com.android.library'
+  id 'expo-module-gradle-plugin'
+}
+
+group = 'host.exp.exponent'
+version = '6.0.8'
+
+android {
+  namespace "expo.modules.trackingtransparency"
+  defaultConfig {
+    versionCode 1
+    versionName "6.0.8"
+  }
+}
+
+dependencies {
+  implementation "com.google.android.gms:play-services-ads-identifier:18.0.1"
+}

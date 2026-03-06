@@ -1,0 +1,67 @@
+<svg xmlns="http://www.w3.org/2000/svg" id="mesh-gradient"
+	    width="500" height="1000" viewBox="0 0 500 1000" >
+	        <defs>
+	            <filter id="blur" filterUnits="userSpaceOnUse" x="0" y="0" width="500" height="1000">
+	                <feGaussianBlur stdDeviation="100" />
+	            </filter>
+	            <image id="noise-image" width="100" height="100" href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAGQAAABkCAYAAABw4pVUAAAACXBIWXMAAAsTAAALEwEAmpwYAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAHm1SURBVHgBJf1Xl6TpmWUHbtNauZu5udZahYcWmRGROqGBKlRVs6rZisPptYZXM/ML4k/MzVzMDLk4ZLOb3V0ogQKQlVqEFq61djc34aa15onkBRYSiRBm9r3v85yzt4eHITzU3a4MTuHazdEsQNU2yJ3idyzfNDB86OEkbmFidAdb1xxHlQj7dif9h10cjccYOIBB5z3eXP6R+dkgg2kf3+2dkgvN0Bc4IJOYo8+WIpA95sRupNs0SLNZJTyW5PDQzOrUMOPPgtiKX9K7MMEfnW0Gi89p1kc4j3Qx4ajh8F+Qr7dweEepjaep/kcjZ+M93LV28dz2t9hPx/CWqnT2j3ES8lIqf8ai1YwjUcXQNuMp9vHd1AXOdhJnpJ+BwnWsoVX+9CDH7f/vEH31En/v2uRTzyiJqSFOiknu6T2sVPux3ylibzvZ/drOJAae/dtVPlyZJvXiFpdz/2+alV4aXjuWxQjZ/zDFgvGCnu45VkJOMrUvuLs2zdPwLpmAk4HiAxbOE9gGdvjMmSar1xaqLpDpSRJ+lcPaWSOaeAfT3cErjw6L54xbpnin0MfO2HPOvCESnZf8+nWQ0kcF9nr7MEQq+N6McRrf5Xp/lQ+eDmGZzbGTN2Cpt7EunpB/Gdc/L9FzEzZ287xTs7M43eIzb5RMfpZk2cmYMcWTzgSNUpvF/DRDrTi77++QX0+Q3qnj7Z4ncVTkLzsOeRX+JamEhQf5FY5v9zH4O33AMz7shjCLwceUizVCtXHMH50SHTyl//dpXJYmttNJoo4uaikfpSkzo8eH7Nb+B3LmHO3YFpV2F4uVILsddS4dKZxz3bzocjH46imLlk4iSR9v7vhwBqsYU7uEB2bI5fSf6AlLOrSJrhxme5tQJkbwIkTcuqNdcaVBRP//lWbwPEyR3dGON+bYCbfQXUgzq5lndDYNZy5NpmlJJNHPv7UZeCevPed/BF/0BjrdXYSqfVSG9whUd8h1KnRs3eL/mCajfwxh/sTCgx2brn2fvzWe7u373Kzusee64gj+y3ub1yy2yXppp+7KAL7zBfk5lGb0GaYZi2HrXIp1jRJLFHVazdz+7xffkgkwl8TfY4wlphgZydBclFl2mnWGDqXgW3Tl9fSTvWS13i0FctMhkdZnbsgfuanJFDZ2Z9iRz0j46tx/8MOlJlUjFeGNjhPXQtA7FJosnF3Q0tWfkNeqRb5k23eciE+RcWqEsghGWvliVF2q05tkRRLwQGP3ZqyYXQ2ZNgjI3PN2stX1Yn/vpH/JTdWt0BZYlxzw0nyUxSW8+uqZE4O72smyps79eYOz9BO79D4jYxphL1XhfqWTXfoe9y2O69EY3G3IfXT1MKKZ6bXUlgwqxdScdVyvUL5JcSacZcU/y/0qEmekskGvaSVuq+F0DFLpK+HfT+Pd1tCWWjt6rKkLqRMtxnN0bZtIUpX51T4UzzFErgHEwSlCgLm3qkpee4KHbyhciwt1xEdd+K0MqqXc336W7mcBwEKeghZ1vSmhZs9w7/RSD0Ul7VWxuqqgEtCOdusDfaWc17j1nwWjBLgt4WwIs13Bh2ZemViFev1rXmHPp3w2ws9LNQuAZA0dKRWNhVnSg/DcENiVvtkqjZAMt3eZdsoafk47o8BbbfPrgmLPuMQrZcTpClwynd9nNJqllelk8atG4sAq7b1EuBzl2LvBvrRscZK1cXjXyfwB9tPjjgHboEAAAAABJRU5ErkJggg==" />
+	        </defs>
+	        <rect id="background" width="100%" height="100%" fill="#0091FF" />
+	        <g id="swatches" width="500" height="1000" filter="url(#blur)">
+	            <rect x="-100" y="-150" width="700" height="400" fill="#0A1A2E" />
+	            <rect x="-165" y="313" width="593" height="503" fill="#003CFF" />
+	            <rect x="141" y="-116" width="348" height="590" fill="#5DA6F0" />
+	        </g>
+	        <g id="noise" width="500" height="1000" style="mix-blend-mode: luminosity; opacity: 20%">
+	            <use href="#noise-image" x="0" y="0" width="100px" height="100px"></use>
+	            <use href="#noise-image" x="100" y="0" width="100px" height="100px"></use>
+	            <use href="#noise-image" x="200" y="0" width="100px" height="100px"></use>
+	            <use href="#noise-image" x="300" y="0" width="100px" height="100px"></use>
+	            <use href="#noise-image" x="400" y="0" width="100px" height="100px"></use>
+	            <use href="#noise-image" x="0" y="100" width="100px" height="100px"></use>
+	            <use href="#noise-image" x="100" y="100" width="100px" height="100px"></use>
+	            <use href="#noise-image" x="200" y="100" width="100px" height="100px"></use>
+	            <use href="#noise-image" x="300" y="100" width="100px" height="100px"></use>
+	            <use href="#noise-image" x="400" y="100" width="100px" height="100px"></use>
+	            <use href="#noise-image" x="0" y="200" width="100px" height="100px"></use>
+	            <use href="#noise-image" x="100" y="200" width="100px" height="100px"></use>
+	            <use href="#noise-image" x="200" y="200" width="100px" height="100px"></use>
+	            <use href="#noise-image" x="300" y="200" width="100px" height="100px"></use>
+	            <use href="#noise-image" x="400" y="200" width="100px" height="100px"></use>
+	            <use href="#noise-image" x="0" y="300" width="100px" height="100px"></use>
+	            <use href="#noise-image" x="100" y="300" width="100px" height="100px"></use>
+	            <use href="#noise-image" x="200" y="300" width="100px" height="100px"></use>
+	            <use href="#noise-image" x="300" y="300" width="100px" height="100px"></use>
+	            <use href="#noise-image" x="400" y="300" width="100px" height="100px"></use>
+	            <use href="#noise-image" x="0" y="400" width="100px" height="100px"></use>
+	            <use href="#noise-image" x="100" y="400" width="100px" height="100px"></use>
+	            <use href="#noise-image" x="200" y="400" width="100px" height="100px"></use>
+	            <use href="#noise-image" x="300" y="400" width="100px" height="100px"></use>
+	            <use href="#noise-image" x="400" y="400" width="100px" height="100px"></use>
+	            <use href="#noise-image" x="0" y="500" width="100px" height="100px"></use>
+	            <use href="#noise-image" x="100" y="500" width="100px" height="100px"></use>
+	            <use href="#noise-image" x="200" y="500" width="100px" height="100px"></use>
+	            <use href="#noise-image" x="300" y="500" width="100px" height="100px"></use>
+	            <use href="#noise-image" x="400" y="500" width="100px" height="100px"></use>
+	            <use href="#noise-image" x="0" y="600" width="100px" height="100px"></use>
+	            <use href="#noise-image" x="100" y="600" width="100px" height="100px"></use>
+	            <use href="#noise-image" x="200" y="600" width="100px" height="100px"></use>
+	            <use href="#noise-image" x="300" y="600" width="100px" height="100px"></use>
+	            <use href="#noise-image" x="400" y="600" width="100px" height="100px"></use>
+	            <use href="#noise-image" x="0" y="700" width="100px" height="100px"></use>
+	            <use href="#noise-image" x="100" y="700" width="100px" height="100px"></use>
+	            <use href="#noise-image" x="200" y="700" width="100px" height="100px"></use>
+	            <use href="#noise-image" x="300" y="700" width="100px" height="100px"></use>
+	            <use href="#noise-image" x="400" y="700" width="100px" height="100px"></use>
+	            <use href="#noise-image" x="0" y="800" width="100px" height="100px"></use>
+	            <use href="#noise-image" x="100" y="800" width="100px" height="100px"></use>
+	            <use href="#noise-image" x="200" y="800" width="100px" height="100px"></use>
+	            <use href="#noise-image" x="300" y="800" width="100px" height="100px"></use>
+	            <use href="#noise-image" x="400" y="800" width="100px" height="100px"></use>
+	            <use href="#noise-image" x="0" y="900" width="100px" height="100px"></use>
+	            <use href="#noise-image" x="100" y="900" width="100px" height="100px"></use>
+	            <use href="#noise-image" x="200" y="900" width="100px" height="100px"></use>
+	            <use href="#noise-image" x="300" y="900" width="100px" height="100px"></use>
+	            <use href="#noise-image" x="400" y="900" width="100px" height="100px"></use>
+	        </g>
+    	</svg>

@@ -1,0 +1,382 @@
+diff --git a/packages/react-native/React/CoreModules/RCTRedBox.h b/packages/react-native/React/CoreModules/RCTRedBox.h
+index a8031aa3ae..2f5615b2a5 100644
+--- a/packages/react-native/React/CoreModules/RCTRedBox.h
++++ b/packages/react-native/React/CoreModules/RCTRedBox.h
+@@ -14,6 +14,8 @@
+ 
+ typedef void (^RCTRedBoxButtonPressHandler)(void);
+ 
++static NSString * const VibecodeRedBoxErrorShown = @"VibecodeRedBoxErrorShown";
++
+ @interface RCTRedBox : NSObject <RCTBridgeModule>
+ 
+ - (void)registerErrorCustomizer:(id<RCTErrorCustomizer>)errorCustomizer;
+diff --git a/packages/react-native/React/CoreModules/RCTRedBox.mm b/packages/react-native/React/CoreModules/RCTRedBox.mm
+index fb057b9692..f2247e848d 100644
+--- a/packages/react-native/React/CoreModules/RCTRedBox.mm
++++ b/packages/react-native/React/CoreModules/RCTRedBox.mm
+@@ -96,9 +96,10 @@ - (instancetype)initWithCustomButtonTitles:(NSArray<NSString *> *)customButtonTi
+ - (void)viewDidLoad
+ {
+   [super viewDidLoad];
+-  self.view.backgroundColor = [UIColor blackColor];
++  // Modern dark theme background
++  self.view.backgroundColor = [UIColor colorWithRed:0.04 green:0.04 blue:0.04 alpha:1.0]; // #0a0a0a
+ 
+-  const CGFloat buttonHeight = 60;
++  const CGFloat buttonHeight = 50;
+ 
+   CGRect detailsFrame = self.view.bounds;
+   detailsFrame.size.height -= buttonHeight + (double)[self bottomSafeViewHeight];
+@@ -108,45 +109,38 @@ - (void)viewDidLoad
+   _stackTraceTableView.delegate = self;
+   _stackTraceTableView.dataSource = self;
+   _stackTraceTableView.backgroundColor = [UIColor clearColor];
+-  _stackTraceTableView.separatorColor = [UIColor colorWithWhite:1 alpha:0.3];
++  _stackTraceTableView.separatorColor = [UIColor colorWithWhite:0.2 alpha:1.0];
+   _stackTraceTableView.separatorStyle = UITableViewCellSeparatorStyleNone;
+   _stackTraceTableView.indicatorStyle = UIScrollViewIndicatorStyleWhite;
+   [self.view addSubview:_stackTraceTableView];
+ 
+ #if TARGET_OS_SIMULATOR || TARGET_OS_MACCATALYST
+-  NSString *reloadText = @"Reload\n(\u2318R)";
+-  NSString *dismissText = @"Dismiss\n(ESC)";
+-  NSString *copyText = @"Copy\n(\u2325\u2318C)";
+-  NSString *extraText = @"Extra Info\n(\u2318E)";
++  NSString *dismissText = @"✕ Dismiss";
++  NSString *copyText = @"📋 Copy";
++  NSString *reloadText = @"🔄 Reload";
+ #else
+-  NSString *reloadText = @"Reload JS";
+-  NSString *dismissText = @"Dismiss";
+-  NSString *copyText = @"Copy";
+-  NSString *extraText = @"Extra Info";
++  NSString *dismissText = @"✕ Dismiss";
++  NSString *copyText = @"📋 Copy";
++  NSString *reloadText = @"🔄 Reload";
+ #endif
+ 
+   UIButton *dismissButton = [self redBoxButton:dismissText
+                        accessibilityIdentifier:@"redbox-dismiss"
+                                       selector:@selector(dismiss)
+                                          block:nil];
+-  UIButton *reloadButton = [self redBoxButton:reloadText
+-                      accessibilityIdentifier:@"redbox-reload"
+-                                     selector:@selector(reload)
+-                                        block:nil];
+   UIButton *copyButton = [self redBoxButton:copyText
+                     accessibilityIdentifier:@"redbox-copy"
+                                    selector:@selector(copyStack)
+                                       block:nil];
+-  UIButton *extraButton = [self redBoxButton:extraText
+-                     accessibilityIdentifier:@"redbox-extra"
+-                                    selector:@selector(showExtraDataViewController)
+-                                       block:nil];
++  UIButton *reloadButton = [self redBoxButton:reloadText
++                      accessibilityIdentifier:@"redbox-reload"
++                                     selector:@selector(reload)
++                                        block:nil];
+ 
+   [NSLayoutConstraint activateConstraints:@[
+     [dismissButton.heightAnchor constraintEqualToConstant:buttonHeight],
+-    [reloadButton.heightAnchor constraintEqualToConstant:buttonHeight],
+     [copyButton.heightAnchor constraintEqualToConstant:buttonHeight],
+-    [extraButton.heightAnchor constraintEqualToConstant:buttonHeight]
++    [reloadButton.heightAnchor constraintEqualToConstant:buttonHeight]
+   ]];
+ 
+   UIStackView *buttonStackView = [[UIStackView alloc] init];
+@@ -154,12 +148,12 @@ - (void)viewDidLoad
+   buttonStackView.axis = UILayoutConstraintAxisHorizontal;
+   buttonStackView.distribution = UIStackViewDistributionFillEqually;
+   buttonStackView.alignment = UIStackViewAlignmentTop;
+-  buttonStackView.backgroundColor = [UIColor colorWithRed:0.1 green:0.1 blue:0.1 alpha:1];
++  buttonStackView.backgroundColor = [UIColor colorWithRed:0.07 green:0.07 blue:0.07 alpha:1.0]; // #111111
++  buttonStackView.spacing = 1;
+ 
+   [buttonStackView addArrangedSubview:dismissButton];
+-  [buttonStackView addArrangedSubview:reloadButton];
+   [buttonStackView addArrangedSubview:copyButton];
+-  [buttonStackView addArrangedSubview:extraButton];
++  [buttonStackView addArrangedSubview:reloadButton];
+ 
+   [self.view addSubview:buttonStackView];
+ 
+@@ -181,7 +175,7 @@ - (void)viewDidLoad
+ 
+   UIView *topBorder = [[UIView alloc] init];
+   topBorder.translatesAutoresizingMaskIntoConstraints = NO;
+-  topBorder.backgroundColor = [UIColor colorWithRed:0.70 green:0.70 blue:0.70 alpha:1.0];
++  topBorder.backgroundColor = [UIColor colorWithWhite:0.2 alpha:1.0];
+   [topBorder.heightAnchor constraintEqualToConstant:1].active = YES;
+ 
+   [self.view addSubview:topBorder];
+@@ -202,13 +196,13 @@ - (UIButton *)redBoxButton:(NSString *)title
+   button.autoresizingMask =
+       UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleTopMargin | UIViewAutoresizingFlexibleRightMargin;
+   button.accessibilityIdentifier = accessibilityIdentifier;
+-  button.titleLabel.font = [UIFont systemFontOfSize:13];
++  button.titleLabel.font = [UIFont systemFontOfSize:14 weight:UIFontWeightMedium];
+   button.titleLabel.lineBreakMode = NSLineBreakByWordWrapping;
+   button.titleLabel.textAlignment = NSTextAlignmentCenter;
+-  button.backgroundColor = [UIColor colorWithRed:0.1 green:0.1 blue:0.1 alpha:1];
++  button.backgroundColor = [UIColor colorWithRed:0.07 green:0.07 blue:0.07 alpha:1.0]; // #111111
+   [button setTitle:title forState:UIControlStateNormal];
+-  [button setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+-  [button setTitleColor:[UIColor colorWithWhite:1 alpha:0.5] forState:UIControlStateHighlighted];
++  [button setTitleColor:[UIColor colorWithWhite:0.7 alpha:1.0] forState:UIControlStateNormal];
++  [button setTitleColor:[UIColor colorWithWhite:1.0 alpha:1.0] forState:UIControlStateHighlighted];
+   if (selector) {
+     [button addTarget:self action:selector forControlEvents:UIControlEventTouchUpInside];
+   } else if (block) {
+@@ -354,14 +348,14 @@ - (UITableViewCell *)reuseCell:(UITableViewCell *)cell forErrorMessage:(NSString
+     cell.textLabel.accessibilityIdentifier = @"redbox-error";
+     cell.textLabel.textColor = [UIColor whiteColor];
+ 
+-    // Prefer a monofont for formatting messages that were designed
+-    // to be displayed in a terminal.
+-    cell.textLabel.font = [UIFont monospacedSystemFontOfSize:14 weight:UIFontWeightBold];
++    // Modern monospace font
++    cell.textLabel.font = [UIFont monospacedSystemFontOfSize:14 weight:UIFontWeightMedium];
+ 
+     cell.textLabel.lineBreakMode = NSLineBreakByWordWrapping;
+     cell.textLabel.numberOfLines = 0;
+     cell.detailTextLabel.textColor = [UIColor whiteColor];
+-    cell.backgroundColor = [UIColor colorWithRed:0.82 green:0.10 blue:0.15 alpha:1.0];
++    // Dark card background instead of red
++    cell.backgroundColor = [UIColor colorWithRed:0.07 green:0.07 blue:0.07 alpha:1.0]; // #111111
+     cell.selectionStyle = UITableViewCellSelectionStyleNone;
+   }
+ 
+@@ -374,15 +368,15 @@ - (UITableViewCell *)reuseCell:(UITableViewCell *)cell forStackFrame:(RCTJSStack
+ {
+   if (!cell) {
+     cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:@"cell"];
+-    cell.textLabel.font = [UIFont fontWithName:@"Menlo-Regular" size:14];
++    cell.textLabel.font = [UIFont monospacedSystemFontOfSize:13 weight:UIFontWeightRegular];
+     cell.textLabel.lineBreakMode = NSLineBreakByCharWrapping;
+     cell.textLabel.numberOfLines = 2;
+-    cell.detailTextLabel.textColor = [UIColor colorWithRed:0.70 green:0.70 blue:0.70 alpha:1.0];
+-    cell.detailTextLabel.font = [UIFont fontWithName:@"Menlo-Regular" size:11];
++    cell.detailTextLabel.textColor = [UIColor colorWithWhite:0.5 alpha:1.0];
++    cell.detailTextLabel.font = [UIFont monospacedSystemFontOfSize:11 weight:UIFontWeightRegular];
+     cell.detailTextLabel.lineBreakMode = NSLineBreakByTruncatingMiddle;
+     cell.backgroundColor = [UIColor clearColor];
+     cell.selectedBackgroundView = [UIView new];
+-    cell.selectedBackgroundView.backgroundColor = [UIColor colorWithWhite:0 alpha:0.2];
++    cell.selectedBackgroundView.backgroundColor = [UIColor colorWithWhite:1 alpha:0.1];
+   }
+ 
+   cell.textLabel.text = stackFrame.methodName ?: @"(unnamed method)";
+@@ -391,9 +385,9 @@ - (UITableViewCell *)reuseCell:(UITableViewCell *)cell forStackFrame:(RCTJSStack
+   } else {
+     cell.detailTextLabel.text = @"";
+   }
+-  cell.textLabel.textColor = stackFrame.collapse ? [UIColor lightGrayColor] : [UIColor whiteColor];
+-  cell.detailTextLabel.textColor = stackFrame.collapse ? [UIColor colorWithRed:0.50 green:0.50 blue:0.50 alpha:1.0]
+-                                                       : [UIColor colorWithRed:0.70 green:0.70 blue:0.70 alpha:1.0];
++  cell.textLabel.textColor = stackFrame.collapse ? [UIColor colorWithWhite:0.4 alpha:1.0] : [UIColor colorWithWhite:0.9 alpha:1.0];
++  cell.detailTextLabel.textColor = stackFrame.collapse ? [UIColor colorWithWhite:0.3 alpha:1.0]
++                                                       : [UIColor colorWithWhite:0.5 alpha:1.0];
+   return cell;
+ }
+ 
+@@ -612,23 +606,55 @@ - (void)showErrorMessage:(NSString *)message
+       self->_extraDataViewController.actionDelegate = self;
+     }
+ 
++    // Emit event when showErrorMessage is called
++// #pragma clang diagnostic push
++// #pragma clang diagnostic ignored "-Wdeprecated-declarations"
++//     [[self->_moduleRegistry moduleForName:"EventDispatcher"] sendDeviceEventWithName:@"redBoxErrorShown"
++//                                                                                 body:@{
++//                                                                                   @"message": message ?: @"",
++//                                                                                   @"isUpdate": @(isUpdate),
++//                                                                                   @"errorCookie": @(errorCookie)
++//                                                                                 }];
++// #pragma clang diagnostic pop
++
++    // Also post a notification for native listeners
++    NSMutableArray *stackDictionaries = [NSMutableArray array];
++    for (RCTJSStackFrame *frame in stack) {
++      NSMutableDictionary *frameDict = [NSMutableDictionary dictionary];
++      if (frame.methodName) frameDict[@"methodName"] = frame.methodName;
++      if (frame.file) frameDict[@"file"] = frame.file;
++      frameDict[@"lineNumber"] = @(frame.lineNumber);
++      frameDict[@"column"] = @(frame.column);
++      frameDict[@"collapse"] = @(frame.collapse);
++      [stackDictionaries addObject:frameDict];
++    }
++
++    [[NSNotificationCenter defaultCenter] postNotificationName:VibecodeRedBoxErrorShown
++                                                        object:self
++                                                      userInfo:@{
++                                                        @"message": message ?: @"",
++                                                        @"isUpdate": @(isUpdate),
++                                                        @"errorCookie": @(errorCookie),
++                                                        @"stack": stackDictionaries
++                                                      }];
++
+ #pragma clang diagnostic push
+ #pragma clang diagnostic ignored "-Wdeprecated-declarations"
+     [[self->_moduleRegistry moduleForName:"EventDispatcher"] sendDeviceEventWithName:@"collectRedBoxExtraData"
+                                                                                 body:nil];
+ #pragma clang diagnostic pop
+-    if (!self->_controller) {
+-      self->_controller = [[RCTRedBoxController alloc] initWithCustomButtonTitles:self->_customButtonTitles
+-                                                             customButtonHandlers:self->_customButtonHandlers];
+-      self->_controller.actionDelegate = self;
+-    }
+-
+-    RCTErrorInfo *errorInfo = [[RCTErrorInfo alloc] initWithErrorMessage:message stack:stack];
+-    errorInfo = [self _customizeError:errorInfo];
+-    [self->_controller showErrorMessage:errorInfo.errorMessage
+-                              withStack:errorInfo.stack
+-                               isUpdate:isUpdate
+-                            errorCookie:errorCookie];
++//    if (!self->_controller) {
++//      self->_controller = [[RCTRedBoxController alloc] initWithCustomButtonTitles:self->_customButtonTitles
++//                                                             customButtonHandlers:self->_customButtonHandlers];
++//      self->_controller.actionDelegate = self;
++//    }
++//
++//    RCTErrorInfo *errorInfo = [[RCTErrorInfo alloc] initWithErrorMessage:message stack:stack];
++//    errorInfo = [self _customizeError:errorInfo];
++//    [self->_controller showErrorMessage:errorInfo.errorMessage
++//                              withStack:errorInfo.stack
++//                               isUpdate:isUpdate
++//                            errorCookie:errorCookie];
+   });
+ }
+ 
+@@ -656,7 +682,8 @@ - (void)loadExtraDataViewController
+ 
+ - (void)invalidate
+ {
+-  [self dismiss];
++  // workaround for https://github.com/facebook/react-native/pull/50867
++  // [self dismiss];
+ }
+ 
+ - (void)redBoxController:(__unused RCTRedBoxController *)redBoxController
+diff --git a/packages/react-native/React/Modules/RCTRedBoxExtraDataViewController.m b/packages/react-native/React/Modules/RCTRedBoxExtraDataViewController.m
+index 6afd630eac..e2e09074e7 100644
+--- a/packages/react-native/React/Modules/RCTRedBoxExtraDataViewController.m
++++ b/packages/react-native/React/Modules/RCTRedBoxExtraDataViewController.m
+@@ -20,7 +20,8 @@ @implementation RCTRedBoxExtraDataCell
+ - (instancetype)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier
+ {
+   if (self = [super initWithStyle:style reuseIdentifier:reuseIdentifier]) {
+-    self.backgroundColor = [UIColor colorWithRed:0.8 green:0 blue:0 alpha:1];
++    // Dark theme background
++    self.backgroundColor = [UIColor colorWithRed:0.07 green:0.07 blue:0.07 alpha:1.0]; // #111111
+     UILayoutGuide *contentLayout = self.contentView.layoutMarginsGuide;
+ 
+     self.keyLabel = [UILabel new];
+@@ -32,10 +33,10 @@ - (instancetype)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSStr
+       [self.keyLabel.bottomAnchor constraintEqualToAnchor:contentLayout.bottomAnchor],
+       [self.keyLabel.widthAnchor constraintEqualToAnchor:contentLayout.widthAnchor multiplier:0.3]
+     ]];
+-    self.keyLabel.textColor = [UIColor whiteColor];
++    self.keyLabel.textColor = [UIColor colorWithWhite:0.7 alpha:1.0];
+     self.keyLabel.numberOfLines = 0;
+     self.keyLabel.lineBreakMode = NSLineBreakByWordWrapping;
+-    self.keyLabel.font = [UIFont fontWithName:@"Menlo-Regular" size:12.0f];
++    self.keyLabel.font = [UIFont monospacedSystemFontOfSize:12 weight:UIFontWeightRegular];
+ 
+     self.valueLabel = [UILabel new];
+     [self.contentView addSubview:self.valueLabel];
+@@ -46,10 +47,10 @@ - (instancetype)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSStr
+       [self.valueLabel.topAnchor constraintEqualToAnchor:contentLayout.topAnchor],
+       [self.valueLabel.bottomAnchor constraintEqualToAnchor:contentLayout.bottomAnchor]
+     ]];
+-    self.valueLabel.textColor = [UIColor whiteColor];
++    self.valueLabel.textColor = [UIColor colorWithWhite:0.9 alpha:1.0];
+     self.valueLabel.numberOfLines = 0;
+     self.valueLabel.lineBreakMode = NSLineBreakByWordWrapping;
+-    self.valueLabel.font = [UIFont fontWithName:@"Menlo-Regular" size:12.0f];
++    self.valueLabel.font = [UIFont monospacedSystemFontOfSize:12 weight:UIFontWeightRegular];
+   }
+   return self;
+ }
+@@ -84,13 +85,14 @@ - (UIButton *)redBoxButtonWithTitle:(NSString *)title
+   UIButton *button = [UIButton buttonWithType:UIButtonTypeCustom];
+   button.accessibilityIdentifier = accessibilityIdentifier;
+ 
+-  button.backgroundColor = [UIColor colorWithRed:0.1 green:0.1 blue:0.1 alpha:1];
++  // Dark theme button
++  button.backgroundColor = [UIColor colorWithRed:0.07 green:0.07 blue:0.07 alpha:1.0]; // #111111
+ 
+-  button.titleLabel.font = [UIFont systemFontOfSize:13];
++  button.titleLabel.font = [UIFont systemFontOfSize:14 weight:UIFontWeightMedium];
+ 
+   [button setTitle:title forState:UIControlStateNormal];
+-  [button setTitleColor:[UIColor colorWithWhite:1 alpha:1] forState:UIControlStateNormal];
+-  [button setTitleColor:[UIColor colorWithWhite:1 alpha:0.5] forState:UIControlStateHighlighted];
++  [button setTitleColor:[UIColor colorWithWhite:0.7 alpha:1.0] forState:UIControlStateNormal];
++  [button setTitleColor:[UIColor colorWithWhite:1.0 alpha:1.0] forState:UIControlStateHighlighted];
+ 
+   [button addTarget:self action:action forControlEvents:UIControlEventTouchUpInside];
+   return button;
+@@ -100,25 +102,26 @@ - (void)viewDidLoad
+ {
+   CGFloat bottomSafeAreaInset = RCTKeyWindow().safeAreaInsets.bottom;
+ 
+-  CGFloat buttonHeight = 60;
++  CGFloat buttonHeight = 50;
+   CGFloat buttonWidth = self.view.bounds.size.width / 2;
+ 
+   _tableView = [UITableView new];
+   _tableView.translatesAutoresizingMaskIntoConstraints = NO;
+   _tableView.delegate = self;
+   _tableView.dataSource = self;
+-  _tableView.backgroundColor = [UIColor colorWithRed:0.8 green:0 blue:0 alpha:1];
++  // Dark theme background
++  _tableView.backgroundColor = [UIColor colorWithRed:0.04 green:0.04 blue:0.04 alpha:1.0]; // #0a0a0a
+   _tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
+   _tableView.indicatorStyle = UIScrollViewIndicatorStyleWhite;
+   _tableView.allowsSelection = NO;
+   [self.view addSubview:_tableView];
+ 
+ #if TARGET_OS_SIMULATOR || TARGET_OS_MACCATALYST
+-  NSString *reloadText = @"Reload JS (\u2318R)";
+-  NSString *dismissText = @"Dismiss (ESC)";
++  NSString *reloadText = @"🔄 Reload";
++  NSString *dismissText = @"✕ Dismiss";
+ #else
+-  NSString *reloadText = @"Reload JS";
+-  NSString *dismissText = @"Dismiss";
++  NSString *reloadText = @"🔄 Reload";
++  NSString *dismissText = @"✕ Dismiss";
+ #endif
+ 
+   UIButton *dismissButton = [self redBoxButtonWithTitle:dismissText
+@@ -133,7 +136,8 @@ - (void)viewDidLoad
+   buttonStackView.axis = UILayoutConstraintAxisHorizontal;
+   buttonStackView.distribution = UIStackViewDistributionFillEqually;
+   buttonStackView.alignment = UIStackViewAlignmentTop;
+-  buttonStackView.backgroundColor = [UIColor colorWithRed:0.1 green:0.1 blue:0.1 alpha:1];
++  buttonStackView.backgroundColor = [UIColor colorWithRed:0.07 green:0.07 blue:0.07 alpha:1.0]; // #111111
++  buttonStackView.spacing = 1;
+ 
+   [buttonStackView addArrangedSubview:dismissButton];
+   [buttonStackView addArrangedSubview:reloadButton];
+@@ -177,7 +181,8 @@ - (CGFloat)tableView:(__unused UITableView *)tableView heightForHeaderInSection:
+ - (UIView *)tableView:(__unused UITableView *)tableView viewForHeaderInSection:(NSInteger)section
+ {
+   UIView *header = [UIView new];
+-  header.backgroundColor = [UIColor colorWithRed:1 green:0 blue:0 alpha:1];
++  // Dark theme header
++  header.backgroundColor = [UIColor colorWithRed:0.1 green:0.1 blue:0.1 alpha:1.0]; // Slightly lighter than cells
+ 
+   UILabel *headerLabel = [UILabel new];
+   [header addSubview:headerLabel];
+@@ -191,7 +196,7 @@ - (UIView *)tableView:(__unused UITableView *)tableView viewForHeaderInSection:(
+   ]];
+ 
+   headerLabel.textColor = [UIColor whiteColor];
+-  headerLabel.font = [UIFont fontWithName:@"Menlo-Bold" size:14.0f];
++  headerLabel.font = [UIFont monospacedSystemFontOfSize:14 weight:UIFontWeightBold];
+   headerLabel.text = [_extraDataTitle[section] uppercaseString];
+ 
+   return header;

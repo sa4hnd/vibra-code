@@ -1,0 +1,8 @@
+{
+  "error": {
+    "message": "Unsupported content type: 'application/json'. This API method only accepts 'multipart/form-data' requests, but you specified the header 'Content-Type: application/json'. Please try again with a supported content type.",
+    "type": "invalid_request_error",
+    "param": null,
+    "code": "unsupported_content_type"
+  }
+}
