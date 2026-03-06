@@ -67,7 +67,9 @@ https://github.com/user-attachments/assets/0d5a79ef-f69a-452b-a25a-9e149de6e05a
 
 ## What is Vibra Code?
 
-Vibra Code lets you build mobile apps by describing them in plain English. An AI agent writes the code in a cloud sandbox while you watch in real time. Then you see a live preview -- right on your phone.
+Vibra Code is an **open-source AI app builder** that lets you create mobile apps by describing them in plain English. An AI agent writes the code in a cloud sandbox while you watch in real time. Then you see a live preview — right on your phone.
+
+Think of it as an **open-source alternative to [Vibe Code App](https://www.vibecodeapp.com/), [Rork](https://rork.com/), [Lovable](https://lovable.dev/), and [Bolt.new](https://bolt.new/)** — but you can self-host it, customize the AI prompts, swap AI providers, and fork it to make it your own.
 
 This is the **complete source code** behind the app on the [App Store](https://apps.apple.com/us/app/vibra-code-ai-app-builder/id6752743077). Built by one developer with [Claude Code](https://claude.ai/code). Now open source.
 
@@ -253,9 +255,22 @@ vibra-code/
 
 ## Built with Claude Code
 
-This entire project -- backend, mobile app, native iOS UI, infrastructure -- was built by one developer using [Claude Code](https://claude.ai/code).
+This entire project — backend, mobile app, native iOS UI, infrastructure — was built by one developer using [Claude Code](https://claude.ai/code).
 
 If you're working on this codebase, Claude Code gives you the best experience. The `CLAUDE.md` has detailed context about every file, pattern, and convention.
+
+## Vibra Code vs Alternatives
+
+Looking for an **AI app builder**? Here's how Vibra Code compares:
+
+- **[Vibe Code App](https://www.vibecodeapp.com/) alternative** — Vibra Code is the open-source version you can self-host and customize
+- **[Rork](https://rork.com/) alternative** — Same concept (describe → AI builds → preview on phone) but fully open source
+- **[Lovable](https://lovable.dev/) alternative** — Lovable focuses on web apps; Vibra Code builds native mobile apps with Expo
+- **[Bolt.new](https://bolt.new/) alternative** — Bolt.new runs in the browser; Vibra Code gives you a native iOS/Android experience
+- **[Cursor](https://cursor.sh/) alternative** — Cursor is an AI code editor; Vibra Code is an AI app builder that generates complete apps from descriptions
+- **[Replit](https://replit.com/) alternative** — Replit is a cloud IDE; Vibra Code is purpose-built for mobile app generation with native preview
+
+Vibra Code is the **first open-source AI mobile app builder**. Fork it, self-host it, make it yours.
 
 ## Contributing
 
@@ -290,7 +305,26 @@ PRs welcome. See [CONTRIBUTING.md](./CONTRIBUTING.md).
 </div>
 
 <!--
-SEO: open source AI app builder, vibe coding, vibecodeapp alternative, rork app alternative,
-lovable alternative, bolt.new alternative, AI mobile app generator, text to app, prompt to app,
-claude code, expo app builder, react native AI, e2b sandbox, self-hosted AI builder
+Keywords: open source AI app builder, AI mobile app builder, vibe coding app, vibe code app,
+vibecodeapp alternative, vibecodeapp open source, rork alternative, rork app alternative,
+rork open source, lovable alternative, lovable open source, bolt.new alternative, bolt new alternative,
+anything.ai alternative, cursor alternative, v0 alternative, replit alternative,
+AI app generator, AI mobile app generator, AI code generator, text to app, prompt to app,
+describe app AI builds it, build app with AI, create app with AI, make app with AI,
+natural language to app, AI builds mobile app, AI app creator, AI app maker,
+mobile app builder no code, no code app builder AI, low code app builder,
+build ios app with AI, build android app with AI, build react native app with AI,
+expo AI app builder, react native AI builder, react native AI code generator,
+self hosted AI builder, self hosted app builder, open source vibe coding,
+open source AI coding, open source mobile app generator,
+claude code project, claude AI app builder, anthropic claude code,
+e2b sandbox, e2b code execution, cloud sandbox AI,
+convex real time, inngest background jobs, expo sdk 54,
+texture iglistkit chat, 60fps chat ui, native ios chat,
+AI pair programming, AI software engineer, AI developer tool,
+build apps by talking, voice to app, image to app, screenshot to app,
+app builder 2024, app builder 2025, app builder 2026,
+best AI app builder, top AI app builder, free AI app builder,
+AI app builder github, AI app builder open source github,
+vibra code, vibracode, vibra code app, vibracode app
 -->
