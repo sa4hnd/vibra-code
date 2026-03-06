@@ -253,6 +253,71 @@ vibra-code/
 
 <br />
 
+## Native iOS Chat System (`ios/Client/Menu/`)
+
+The heart of the mobile app is a **high-performance native chat UI** built with Texture (AsyncDisplayKit) + IGListKit for 60fps scrolling. This is where users interact with the AI agent.
+
+### Core Files
+
+| File | Purpose |
+|------|---------|
+| **`EXPreviewZoomManager.h/m`** | Main singleton — coordinates zoom, chat, bars, and the entire preview experience |
+| **`EXPreviewZoomManager+Zoom.m`** | Zoom in/out animations (3D transform with perspective) |
+| **`EXPreviewZoomManager+ChatView.m`** | Chat UI, message rendering, session loading from Convex |
+| **`EXPreviewZoomManager+TopBar.m`** | Top bar — app name, refresh button, chevron, three-dots menu |
+| **`EXPreviewZoomManager+BottomBar.m`** | Bottom bar — text input, send, mic (voice), image attach, model selector |
+| **`EXPreviewZoomManager+Keyboard.m`** | Keyboard show/hide handling and layout constraints |
+| **`EXPreviewZoomManager+Gestures.m`** | Tap gestures for zoom/chat toggle |
+| **`EXPreviewZoomManager+WebPreview.m`** | Web project preview (WKWebView for non-mobile projects) |
+
+### Chat Components (`Chat/`)
+
+| File | Purpose |
+|------|---------|
+| **`EXChatListAdapter.h/m`** | IGListKit + Texture adapter — O(N) diffing for efficient list updates |
+| **`EXChatMessageNode.h/m`** | ASCellNode for user/assistant text messages with markdown |
+| **`EXChatGroupNode.h/m`** | ASCellNode for tool operations — file reads (blue), edits (orange), bash (green) |
+| **`EXChatTaskCardNode.h/m`** | ASCellNode for todo task cards with Liquid Glass effect |
+| **`EXChatStatusNode.h/m`** | "Working..." status indicator with shimmer animation |
+| **`EXChatMessageCache.h/m`** | Message caching for offline support |
+| **`EXLottieAnimationHelper.swift`** | Cell animations (springIn, fadeIn, shimmer, glass effects) |
+| **`EXMarkdownHelper.swift`** | Markdown parsing (bold, italic, code blocks, links) |
+
+### Services
+
+| File | Purpose |
+|------|---------|
+| **`EXChatBackendService.h/m`** | API calls to Convex backend — send messages, load sessions |
+| **`EXAudioRecorderService.h/m`** | Voice recording for voice input |
+| **`EXAssemblyAIService.h/m`** | Speech-to-text transcription |
+| **`EXWebPreviewView.h/m`** | WKWebView wrapper for web project previews |
+
+### Modals
+
+| File | Purpose |
+|------|---------|
+| **`+APIModal.m`** | AI provider selector (Claude, Cursor, Gemini) |
+| **`+FilesModal.m`** | File browser — browse generated project files |
+| **`+LogsModal.m`** | Live logs viewer from the sandbox |
+| **`+PublishModal.m`** | Publish to GitHub / share project |
+| **`+HapticModal.m`** | Haptic feedback settings |
+| **`+ENVModal.m`** | Environment variables editor |
+
+### Message Types
+
+The chat renders different node types based on the message content from Convex:
+
+| Type | Node | Visual |
+|------|------|--------|
+| `message` | `EXChatMessageNode` | User/assistant text with markdown |
+| `read` | `EXChatGroupNode` | File read operations (blue accent) |
+| `edit` | `EXChatGroupNode` | File edit operations (orange accent) |
+| `bash` | `EXChatGroupNode` | Terminal commands (green accent) |
+| `tasks` | `EXChatTaskCardNode` | Todo list with Liquid Glass |
+| `status` | `EXChatStatusNode` | Working indicator with shimmer |
+
+<br />
+
 ## Built with Claude Code
 
 This entire project — backend, mobile app, native iOS UI, infrastructure — was built by one developer using [Claude Code](https://claude.ai/code).
